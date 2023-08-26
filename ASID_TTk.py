@@ -27,7 +27,7 @@ class ArtStationImageDownloader(tk.Tk):
         self.txtbx_out = tk.scrolledtext.ScrolledText(master=self.lblfrm_outFrame, wrap=tk.WORD, height=15, width=self.ntbk_mainNotebook['width'], state="disabled", relief=tk.FLAT, name='outputBox')
         ### notebook elements ###
         #### scrape from likes page ####
-        self.frm_likespageFrame = tk.Frame(master=self.ntbk_mainNotebook, width= 150, height=60, name='likespageFrame')
+        self.frm_likespageFrame = tk.Frame(master=self.ntbk_mainNotebook, width=150, height=60, name='likespageFrame')
         self.btn_selectPathLP = ttk.Button(master=self.frm_likespageFrame, text="Select Storage\nPath", width=15, command=lambda: self.pathSelectDialog(self.ent_storepathLP), name='btn_selectpath')
         self.lbl_storepathLP = ttk.Label(master=self.frm_likespageFrame, text="Write to:")
         self.ent_storepathLP = ttk.Entry(master=self.frm_likespageFrame, width=25, textvariable=self.STORE_PATH, state="readonly", name='ent_storepath')
@@ -76,18 +76,21 @@ class ArtStationImageDownloader(tk.Tk):
         selectedFolder = filedialog.askdirectory()
         self.STORE_PATH.set(selectedFolder)
 
-    #
+    #clear previously selected storage directory (logically), which should clear visually represented information in turn
     def clearSelectedPath(self, event):
         self.STORE_PATH.set("")
 
+    #update txtbx_out (output textbox) with given text
     def writeOutput(self, text, form='normal'):
         self.txtbx_out.config(state="normal")
         self.txtbx_out.delete("1.0", "end")
         self.txtbx_out.insert(tk.INSERT, text, form)
-        self.txtbx_out.tag_config('error', foreground='red')
+        self.txtbx_out.tag_config('error', foreground='red')            #format text to red color if form is 'error'
         self.txtbx_out.config(state="disabled")
 
+    #check inputs, run external scripts if all good
     def runScript(self, slctn):
+        #slctn <- tab selected (0, 1, ...), counting from left to right
         storepath = self.STORE_PATH.get()
         self.STORE_UNAME.set(self.ent_username.get())
         uname = self.STORE_UNAME.get()
@@ -96,37 +99,36 @@ class ArtStationImageDownloader(tk.Tk):
         output = ""
 
         #error checks:
+        ##storage path valid? (not blank, does exist)
         if ((storepath == "") or not os.path.exists(storepath)):
-            # print("storage path invalid...")         #debug print
             e = "Error: Storage path invalid"
             self.writeOutput(e, 'error')
             return
         try:
             if(slctn == 0):
+                ##username valid? (no special chars, not blank/space)
                 if((re.compile(r"[<>/{}[\]~`%]").search(uname) or (uname == "") or (uname == " "))):
                     e = "Error: Username invalid"
                     self.writeOutput(e, 'error')
                     return
                 else:
-                    # default selection: scrape from likes page
+                    #scrape from given Likes page
                     p = subprocess.check_output(f"node likespagedownloader.js {storepath} {uname}")
                     output = p.decode("utf-8")
             elif (slctn == 1):
+                ##project url valid? (not blank/space, starts with actual https url)
                 if((url == "") or (url == " ") or not (url.startswith("https://www.artstation.com/artwork/"))):
                     e = "Error: URL invalid"
                     self.writeOutput(e, 'error')
                     return
                 else:
-                    #alt selection: scrape from given project page
+                    #scrape from given project page
                     p = subprocess.check_output(f"node singleprojectdownloader.js {storepath} {url}")
                     output = p.decode("utf-8")
-            #print(output)           #debug print
             self.writeOutput(output)
         except (subprocess.SubprocessError, subprocess.CalledProcessError):
             e = "Something went wrong. Ensure inputs exist."
             self.writeOutput(e, 'error')
-
-
 
 
 
