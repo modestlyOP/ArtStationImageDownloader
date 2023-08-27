@@ -14,3 +14,5 @@ Repeated runs of this script in short timeframes WILL cause you to be IP banned 
 
 ## How To Run:
 Simply run ``python ASID_TTk.py`` in command line (or just double-click that same file).
+
+![image](https://github.com/modestlyOP/ArtStationImageDownloader/assets/48741294/a5113576-9f7c-4a44-b81a-32bb90c8bda2)
