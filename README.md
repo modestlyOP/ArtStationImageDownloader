@@ -7,7 +7,7 @@ This program scrapes images from a given ArtStation "Likes" Collections page (e.
 - Figure out how to download video files as video
 
 ## DISCLAIMER:
-This tool is for educational and personal non-profit use only! No AI is being trained with the downloaded images, nor are there plans to do this. Rather, the images obtained are for more easily inspiring other artists and/or providing them with curated reference art on demand and offline. 
+This tool is for educational and personal non-profit use only! No AI is being trained with the downloaded images, nor are there plans to do this. Rather, the images obtained are for more easily inspiring other artists and/or providing them with curated reference art on demand and offline. A secondary purpose is archiving.
 
 ## WARNING:
 Repeated runs of this script in short timeframes WILL cause you to be IP banned from ArtStation if downloading large numbers of files (250+)! Space out your runs acordingly!
