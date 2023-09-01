@@ -4,6 +4,7 @@ This program scrapes images from a given ArtStation "Likes" Collections page (e.
 ## To-do:
 - Create a similar scraper script in python
 - ~~Put a GUI over the script~~ (~~prompt username, storage path~~; display progress, ~~errors~~; ~~give option to download from a given project source~~)
+- Upgrade GUI to Qt from Tk
 - Figure out how to download video files as video
 
 ## DISCLAIMER:
