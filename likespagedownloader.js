@@ -168,8 +168,8 @@ fetchJSON(likesPageUrl).then(function(result) {
         console.log("No projects available");
     }
     else {
-        console.log("Initiating file retrieval...");
-        for(let i = 0; i < result["data"].length-10; i++){
+        console.log("Checking for new projects...");
+        for(let i = 0; i < result["data"].length; i++){
 
             let fullPath = createDir(filePathFormatter(result["data"][i]["user"]["full_name"], result["data"][i]["title"]))
 
