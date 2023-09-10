@@ -14,6 +14,6 @@ This tool is for educational and personal non-profit use only! No AI is being tr
 Repeated runs of this script in short timeframes WILL cause you to be IP banned from ArtStation if downloading large numbers of files (250+)! Space out your runs acordingly!
 
 ## How To Run:
-Simply run ``python ASID_TTk.py`` in command line (or just double-click that same file).
+Simply run ``python [ASID_TTk.py or ASID_CTk.py] `` in command line (or just double-click that same file in Windows).
 
 ![image](https://github.com/modestlyOP/ArtStationImageDownloader/assets/48741294/a5113576-9f7c-4a44-b81a-32bb90c8bda2)
