@@ -16,6 +16,7 @@ const fs = require('fs');
 const client = require('https');
 const rootPath = inputs[2];
 const likesPageUrl = "https://www.artstation.com/users/" + inputs[3] + "/likes.json";
+const maxPrj = inputs[4];
 let fileRetrievalCounter = 0;
 let prjCounter = 0;
 
@@ -169,8 +170,8 @@ fetchJSON(likesPageUrl).then(function(result) {
     }
     else {
         console.log("Checking for new projects...");
-        for(let i = 0; i < result["data"].length; i++){
-
+        for(let i = 0; i < result["data"].length - (result["data"].length - maxPrj); i++){
+            //note that result["data"].length should be 50, that's the most ArtStation's API allows to access from the JSON file
             let fullPath = createDir(filePathFormatter(result["data"][i]["user"]["full_name"], result["data"][i]["title"]))
 
             //create artstation.com/project/[hash_id].json
